@@ -10,7 +10,7 @@
   but comments are placed where and how these lines should be changed if MIC is indeed Digital.
     - Will place the LED in slot 7, and MIC in slot 13 to keep them as far away from each other as possible
       on the Arduino Yun board.
-    - Included are 6 listed changes to be made on the off chance MIC is Digital
+    - Included are 7 listed changes to be made on the off chance MIC is Digital
 
   4) Included a constant called THRESHOLD to hold the sound value.  If this needs tweaking, change the value
      of the constant - this will update throughout the rest of the program automatically
@@ -72,7 +72,8 @@ unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line wi
     {
       beat++; // increments the number of beats
     }// end if
-    
+
+    sound = analogRead(sound); // 7) NOTE: if MIC is digital, replace line with: sound = digitalRead(sound);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
