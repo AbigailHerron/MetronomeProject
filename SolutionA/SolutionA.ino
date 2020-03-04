@@ -62,7 +62,7 @@ void loop() {
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
