@@ -50,12 +50,12 @@ void setup() {
 void loop() {
   // declaring val variable (local to loop only)
   unsigned long val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
-  GetBeats(val);
+  unsigned long beatDelay = GetBeats(val);
 
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
   digitalWrite(LED, LOW);
-  delay(c - 250);
+  delay(beatDelay - 250);
 }
 
 
