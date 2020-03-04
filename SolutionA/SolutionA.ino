@@ -49,7 +49,7 @@ void setup() {
 // Running the Program
 void loop() {
   // declaring val variable (local to loop only)
-  val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: val = digitalRead(MIC);
+  unsigned long val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: val = digitalRead(MIC);
   GetBeats(val);
 
   digitalWrite(LED, HIGH);
