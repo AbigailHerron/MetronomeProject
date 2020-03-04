@@ -66,7 +66,7 @@ unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, repla
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
-  while(b < 60000) // Until 6 seconds have passed
+  while(b < 6000) // Until 6 seconds have passed
   {
     if(sound > THRESHOLD) // 6) NOTE: if MIC is digital, replace line with: if(sound == THRESHOLD)
     {
