@@ -14,7 +14,7 @@ const int LED = 7;
 const int MIC = A0; // 1) NOTE: if MIC is a digital input, replace line with: const int MIC = 13
 
   // Declaring sound threshold here
-const int THRESHOLD = 500;  // 2) NOTE: if MIC is digital, replace line with: const string THRESHOLD = "HIGH";
+const int THRESHOLD = 0;  // 2) NOTE: if MIC is digital, replace line with: const string THRESHOLD = "HIGH";
 const unsigned long MINUTE = 60000; // there are 60 thousand milliseconds in a minute
 
   // Declaring millisecond variables
