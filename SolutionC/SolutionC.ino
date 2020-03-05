@@ -51,7 +51,7 @@ void setup() {
   // only want to run this while no beats have been recorded
   if(beat == 0)
   {
-    val = analogRead(MIC); // 3) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
+    val = analogRead(MIC); // 3) NOTE: if MIC is digital, replace line with: val = digitalRead(MIC);
     GetBeats(val);
  
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
@@ -91,12 +91,12 @@ void GetBeats(int sound) // 4) NOTE: if MIC is digital, replace line with: int G
   
   while(b < 6000) // Until 6 seconds have passed
   {
-    if(sound > THRESHOLD) // 5) NOTE: if MIC is digital, replace line with: if(sound == THRESHOLD)
+    if(sound > THRESHOLD)
     {
       beat++; // increments the number of beats
     }// end if
 
-    sound = analogRead(MIC); // 6) NOTE: if MIC is digital, replace line with: sound = (unsigned long)digitalRead(MIC);
+    sound = analogRead(MIC); // 5) NOTE: if MIC is digital, replace line with: sound = digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
