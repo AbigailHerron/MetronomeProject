@@ -92,7 +92,7 @@ unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, repla
       beat++; // increments the number of beats
     }// end if
 
-    sound = analogRead(sound); // 7) NOTE: if MIC is digital, replace line with: sound = digitalRead(sound);
+    sound = analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
