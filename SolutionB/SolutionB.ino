@@ -20,7 +20,7 @@ const unsigned long MINUTE = 60000; // there are 60 thousand milliseconds in a m
   // Declaring millisecond variables
 unsigned long a; // time-stamp at start
 unsigned long b; // updates as GetBeats() runs
-int c; // is the returned length between each beat in a minute
+unsigned long c; // is the returned length between each beat in a minute
 
   // Declaring beat counter
 int beat = 0;
@@ -54,8 +54,8 @@ void loop() {
 
     
     // declaring val and beatDelay variables (local to loop only)
-    int val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
-    int beatDelay = GetBeats(val);
+    unsigned long val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
+    unsigned long beatDelay = GetBeats(val);
 
 
     // Two LED blips after recording
@@ -81,7 +81,7 @@ void loop() {
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-int GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
