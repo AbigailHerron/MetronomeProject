@@ -6,8 +6,14 @@
  * 
  * 2) Put the initial blinking LED to indicate Start and Stop recording into the GetBeat() function.
  * 
- * 3) Declared int val and unsigned long beatDelay before either setup() or loop() functions
- *  */
+ * 3) Declared int val before either setup() or loop() functions
+ * 
+ * 4) Deleted beatDelay - changed GetBeat() to type VOID and had it update variable c instead
+ * 
+ * 5) Returned MINUTE to a constant, included the time we want the LED to stay on as the constant LED_BLINK
+ * 
+ * 6) Passed variable c to delay instead of beatDelay, updated the time of variable c to include the loss of LED_BLINK length
+ *    so that the tempo delay() wouldn't have to perform a calculation inside it*/
 
 // Declaring Variables and Constants
   // Declaring pins
@@ -18,12 +24,14 @@ const int MIC = A0; // 1) NOTE: if MIC is a digital input, replace line with: co
 const int THRESHOLD = 0;  // 2) NOTE: if MIC is digital, replace line with: const string THRESHOLD = "HIGH";
 
 
+const unsigned long LED_BLINK = 250;  // Declaring LED on length here
+const unsigned long MINUTE = 60000;  // there are 60 thousand milliseconds in a minute
+
+
   // Declaring millisecond variables
 unsigned long a; // time-stamp at start
 unsigned long b; // updates as GetBeats() runs
 unsigned long c; // is the returned length between each beat in a minute
-unsigned long minute = 60000; // there are 60 thousand milliseconds in a minute
-unsigned long beatDelay = 0;
 
   // Declaring beat counter
 int beat = 0;
@@ -40,7 +48,7 @@ void setup() {
   if(beat == 0)
   {
     val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
-    beatDelay = GetBeats(val);
+    GetBeats(val);
  
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
   } // end of if() - end of recording beats
@@ -56,14 +64,14 @@ void loop() {
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
   digitalWrite(LED, LOW);
-  delay(beatDelay - 250);
+  delay(c);
 }// end loop()
 
 
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+void GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
   // Two LED blips before recording
     digitalWrite(LED, HIGH);
@@ -101,7 +109,5 @@ unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line wi
   // updating beats to match a minutes worth
   beat = beat * 10;
 
-  c = minute / beat;
-
-  return c;
+  c = (MINUTE / beat) - LED_BLINK;
 }// end GetBeats()
