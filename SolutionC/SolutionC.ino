@@ -99,7 +99,7 @@ unsigned long GetBeats(unsigned long val) // 5) NOTE: if MIC is digital, replace
       beat++; // increments the number of beats
     }// end if
 
-    val = (unsigned long)analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = digitalRead(sound);
+    val = (unsigned long)analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: val = (unsigned long)digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
