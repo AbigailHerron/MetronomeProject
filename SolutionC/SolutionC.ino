@@ -28,7 +28,7 @@ const int THRESHOLD = 0;  // 2) NOTE: if MIC is digital, replace line with: cons
 unsigned long a; // time-stamp at start
 unsigned long b; // updates as GetBeats() runs
 unsigned long c; // is the returned length between each beat in a minute
-unsigned long MINUTE = 60000; // there are 60 thousand milliseconds in a minute
+unsigned long minute = 60000; // there are 60 thousand milliseconds in a minute
 
   // Declaring beat counter
 int beat = 0;
@@ -107,7 +107,7 @@ unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, repla
   // updating beats to match a minutes worth
   beat = beat * 10;
 
-  c = (unsigned long)(MINUTE / beat);
+  c = (unsigned long)(minute / beat);
 
   return c;
   
