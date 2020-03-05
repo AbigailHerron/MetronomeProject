@@ -37,7 +37,6 @@ int beat = 0;
 // Setting up Pins
 void setup() {
   pinMode(LED, OUTPUT);
-  pinMode(MIC, INPUT);
   Serial.begin(9600); // 3) NOTE: if MIC is digital, replace line with: pinMode(MIC, INPUT);
 
 }// end setup()
@@ -63,7 +62,7 @@ void loop() {
 
     
     // declaring val and beatDelay variables (local to loop only)
-    unsigned long val = (unsigned long)analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
+    unsigned long val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
     unsigned long beatDelay = GetBeats(val);
 
 
@@ -90,7 +89,7 @@ void loop() {
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
@@ -101,7 +100,7 @@ unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, repla
       beat++; // increments the number of beats
     }// end if
 
-    sound = (unsigned long)analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = (unsigned long)digitalRead(MIC);
+    sound = analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = (unsigned long)digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
