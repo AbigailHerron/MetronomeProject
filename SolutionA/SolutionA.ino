@@ -1,4 +1,4 @@
-// THIS IS A POSSIBLE SOLUTION TO METRONOME PROBLEM - THIS SHOULD RUN
+@m// THIS IS A POSSIBLE SOLUTION TO METRONOME PROBLEM - THIS SHOULD RUN
 /*NOTES:
  * 1) Continuing forward with millis() as the measurement used is in milliseconds, which is consistent
   with the delay() fuction, also measured in milliseconds.
@@ -39,6 +39,7 @@ int beat = 0;
 // Setting up Pins
 void setup() {
   pinMode(LED, OUTPUT);
+  pinMode(MIC, INPUT);
   Serial.begin(9600); // 3) NOTE: if MIC is digital, replace line with: pinMode(MIC, INPUT);
 
 }
@@ -78,7 +79,7 @@ unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, repla
       beat++; // increments the number of beats
     }// end if
 
-    sound = analogRead(sound); // 7) NOTE: if MIC is digital, replace line with: sound = digitalRead(sound);
+    sound = analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
