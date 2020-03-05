@@ -13,7 +13,9 @@
  * 5) Returned MINUTE to a constant, included the time we want the LED to stay on as the constant LED_BLINK
  * 
  * 6) Passed variable c to delay instead of beatDelay, updated the time of variable c to include the loss of LED_BLINK length
- *    so that the tempo delay() wouldn't have to perform a calculation inside it*/
+ *    so that the tempo delay() wouldn't have to perform a calculation inside it
+ *    
+ * 7) Removed Serial.begin(9600) and replaced it with pinMode(MIC, INPUT)*/
 
 // Declaring Variables and Constants
   // Declaring pins
@@ -42,12 +44,12 @@ void setup() {
 
   // Setting up Pins
   pinMode(LED, OUTPUT);
-  Serial.begin(9600); // 3) NOTE: if MIC is digital, replace line with: pinMode(MIC, INPUT);
+  pinMode(MIC, INPUT); 
 
   // only want to run this while no beats have been recorded
   if(beat == 0)
   {
-    val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
+    val = analogRead(MIC); // 3) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
     GetBeats(val);
  
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
@@ -71,7 +73,7 @@ void loop() {
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-void GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+void GetBeats(int sound) // 4) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
   // Two LED blips before recording
     digitalWrite(LED, HIGH);
@@ -88,12 +90,12 @@ void GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int G
   
   while(b < 6000) // Until 6 seconds have passed
   {
-    if(sound > THRESHOLD) // 6) NOTE: if MIC is digital, replace line with: if(sound == THRESHOLD)
+    if(sound > THRESHOLD) // 5) NOTE: if MIC is digital, replace line with: if(sound == THRESHOLD)
     {
       beat++; // increments the number of beats
     }// end if
 
-    sound = analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = (unsigned long)digitalRead(MIC);
+    sound = analogRead(MIC); // 6) NOTE: if MIC is digital, replace line with: sound = (unsigned long)digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
