@@ -20,7 +20,7 @@
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7;
-const int MIC = A0; // 1) NOTE: if MIC is a digital input, replace line with: const int MIC = 13
+const int MIC = A0; // 1) NOTE: if MIC is a digital input, replace line with: const int MIC = 9
 
   // Declaring sound threshold here
 const int THRESHOLD = 0;  // 2) NOTE: if MIC is digital, replace line with: const string THRESHOLD = "HIGH";
@@ -54,7 +54,6 @@ void setup() {
  
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
   } // end of if() - end of recording beats
-
 }// end setup()
 
 
