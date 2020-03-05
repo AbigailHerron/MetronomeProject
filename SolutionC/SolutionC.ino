@@ -1,19 +1,13 @@
 // THIS IS A POSSIBLE SOLUTION TO METRONOME PROBLEM - THIS SHOULD RUN
 /*NOTES:
- * This is almost identical to Solution B: Changed from relying on implicit to explicit TYPE CASTING
- 
-   Problem faced with Solution B is that, despite the initial recording portion displaying correctly,
-   the tempo did not update.
-   
-   As the recording section DOES start with two LED blips and ends with two LED blips, the millis() countdown
-   section of GetBeat() is operational.
-
-   This leads to the conclution that beatDelay is not recording the correct value.  Possible solution, as made in
-   Solution C, is to TYPE CAST the initial analogRead(MIC) (which reats as an int) to unsigned long.
-
-   As an added measure, the value of c at the end of GetBeat() is also TYPE CAST to unsigned long to ensure that the
-   correct data type is passed into the temp delay() section, as delay() will ONLY ACCEPT VALUES of type unsigned long.
-   */
+ * This is almost identical to Solution B: CHANGES BELOW
+ * 
+ * 1) Moved the initial setup of beatDelay to the setup() as it only runs once.
+ * 
+ * 2) Put the initial blinking LED to indicate Start and Stop recording into the GetBeat() function.
+ * 
+ * 3) Declared int val and unsigned long beatDelay before either setup() or loop() functions
+ *  */
 
 // Declaring Variables and Constants
   // Declaring pins
@@ -29,15 +23,27 @@ unsigned long a; // time-stamp at start
 unsigned long b; // updates as GetBeats() runs
 unsigned long c; // is the returned length between each beat in a minute
 unsigned long minute = 60000; // there are 60 thousand milliseconds in a minute
+unsigned long beatDelay = 0;
 
   // Declaring beat counter
 int beat = 0;
+int val = 0;
 
 
-// Setting up Pins
 void setup() {
+
+  // Setting up Pins
   pinMode(LED, OUTPUT);
   Serial.begin(9600); // 3) NOTE: if MIC is digital, replace line with: pinMode(MIC, INPUT);
+
+  // only want to run this while no beats have been recorded
+  if(beat == 0)
+  {
+    val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
+    beatDelay = GetBeats(val);
+ 
+    delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
+  } // end of if() - end of recording beats
 
 }// end setup()
 
@@ -46,38 +52,6 @@ void setup() {
 
 // Running the Program
 void loop() {
-
-  // only want to run this while no beats have been recorded
-  if(beat == 0)
-  {
-    // Two LED blips before recording
-    digitalWrite(LED, HIGH);
-    delay(200);
-    digitalWrite(LED, LOW);
-    delay(200);
-    digitalWrite(LED, HIGH);
-    delay(200);
-    digitalWrite(LED, LOW);
-    delay(200);
-
-    
-    // declaring val and beatDelay variables (local to loop only)
-    unsigned long val = analogRead(MIC); // 4) NOTE: if MIC is digital, replace line with: unsigned long val = digitalRead(MIC);
-    unsigned long beatDelay = GetBeats(val);
-
-
-    // Two LED blips after recording
-    digitalWrite(LED, HIGH);
-    delay(200);
-    digitalWrite(LED, LOW);
-    delay(200);
-    digitalWrite(LED, HIGH);
-    delay(200);
-    digitalWrite(LED, LOW);
-    delay(3000);     // 3 second delay before the LED starts repeating the recorded interval
-  } // end of if() - end of recording beats
-
-
   // LED begins blinking to tempo
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
@@ -91,6 +65,17 @@ void loop() {
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
 unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
+  // Two LED blips before recording
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+
+  
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
   while(b < 6000) // Until 6 seconds have passed
@@ -104,11 +89,19 @@ unsigned long GetBeats(int sound) // 5) NOTE: if MIC is digital, replace line wi
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
+  // Two LED blips after recording
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);
+    delay(200);
+    digitalWrite(LED, HIGH);
+    delay(200);
+    digitalWrite(LED, LOW);  
+
   // updating beats to match a minutes worth
   beat = beat * 10;
 
-  c = (unsigned long)(minute / beat);
+  c = minute / beat;
 
   return c;
-  
 }// end GetBeats()
