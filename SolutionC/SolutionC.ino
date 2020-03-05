@@ -43,9 +43,9 @@ int val = 0;
 void setup() {
 
   // Setting up Pins
-  pinMode(LED, OUTPUT);
   pinMode(MIC, INPUT); 
-
+  pinMode(LED, OUTPUT);
+  
   // only want to run this while no beats have been recorded
   if(beat == 0)
   {
