@@ -17,6 +17,8 @@
  *    
  * 7) Removed Serial.begin(9600) and replaced it with pinMode(MIC, INPUT)*/
 
+ 
+
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7;
@@ -33,7 +35,7 @@ const unsigned long MINUTE = 60000;  // there are 60 thousand milliseconds in a 
   // Declaring millisecond variables
 unsigned long a; // time-stamp at start
 unsigned long b; // updates as GetBeats() runs (new time-stamp minus a (old time-stamp))
-unsigned long c; // is the returned length between each beat in a minute
+unsigned long c; // is the returned length between each beat in a minute (minuse the length of the LED being ON)
 
   // Declaring beat counter
 int beat = 0;
