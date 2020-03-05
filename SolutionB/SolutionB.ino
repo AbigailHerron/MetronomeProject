@@ -30,6 +30,7 @@ int beat = 0;
 // Setting up Pins
 void setup() {
   pinMode(LED, OUTPUT);
+  pinMode(MIC, INPUT);
   Serial.begin(9600); // 3) NOTE: if MIC is digital, replace line with: pinMode(MIC, INPUT);
 
 }// end setup()
