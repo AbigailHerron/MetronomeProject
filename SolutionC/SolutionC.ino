@@ -24,13 +24,13 @@ const int MIC = A0; // 1) NOTE: if MIC is a digital input, replace line with: co
 const int THRESHOLD = 0;  // 2) NOTE: if MIC is digital, replace line with: const string THRESHOLD = "HIGH";
 
 
-const unsigned long LED_BLINK = 250;  // Declaring LED on length here
+const unsigned long LED_BLINK = 250;  // Declaring LED ON length here
 const unsigned long MINUTE = 60000;  // there are 60 thousand milliseconds in a minute
 
 
   // Declaring millisecond variables
 unsigned long a; // time-stamp at start
-unsigned long b; // updates as GetBeats() runs
+unsigned long b; // updates as GetBeats() runs (new time-stamp minus a (old time-stamp))
 unsigned long c; // is the returned length between each beat in a minute
 
   // Declaring beat counter
