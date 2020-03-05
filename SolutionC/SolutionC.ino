@@ -1,6 +1,6 @@
 // THIS IS A POSSIBLE SOLUTION TO METRONOME PROBLEM - THIS SHOULD RUN
 /*NOTES:
- * This is almost identical to Solution B.
+ * This is almost identical to Solution B: Changed from relying on implicit to explicit TYPE CASTING
  
    Problem faced with Solution B is that, despite the initial recording portion displaying correctly,
    the tempo did not update.
@@ -88,18 +88,18 @@ void loop() {
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(unsigned long val) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+unsigned long GetBeats(unsigned long sound) // 5) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
   while(b < 6000) // Until 6 seconds have passed
   {
-    if(val > THRESHOLD) // 6) NOTE: if MIC is digital, replace line with: if(sound == THRESHOLD)
+    if(sound > THRESHOLD) // 6) NOTE: if MIC is digital, replace line with: if(sound == THRESHOLD)
     {
       beat++; // increments the number of beats
     }// end if
 
-    val = (unsigned long)analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: val = (unsigned long)digitalRead(MIC);
+    sound = (unsigned long)analogRead(MIC); // 7) NOTE: if MIC is digital, replace line with: sound = (unsigned long)digitalRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
