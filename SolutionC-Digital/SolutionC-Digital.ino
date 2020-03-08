@@ -32,8 +32,14 @@ void setup() {
   // Setting up Pins
   pinMode(MIC, INPUT); 
   pinMode(LED, OUTPUT);
-  
-  // only want to run this while no beats have been recorded
+}// end setup()
+
+
+
+
+// Running the Program
+void loop() {
+  // MIC must record at least 1 sound before the recording-beats can take place
   while(val <= 0)
   {
     val = digitalRead(MIC);
@@ -45,13 +51,7 @@ void setup() {
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
   } // end of if() - end of recording beats
 
-}// end setup()
-
-
-
-
-// Running the Program
-void loop() {
+  
   // LED begins blinking to tempo
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
@@ -64,6 +64,7 @@ void loop() {
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
 void GetBeats(int sound)
+{
   // Two LED blips before recording
     digitalWrite(LED, HIGH);
     delay(200);
