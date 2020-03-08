@@ -16,10 +16,10 @@
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7; // Place LED in pin 7 please
-const int MIC = 9; // Place MIC sensor in pin 9 please
+const int MIC = A0; // Place MIC sensor in pin A0 please
 
   // Declaring sound threshold here
-const int THRESHOLD = 200;
+const int THRESHOLD = 100;
 
 
   // Declaring millisecond variables
