@@ -1,37 +1,54 @@
 // THIS PROGRAM IS A TEST - TRYING TO GET THE TIMING INTERVAL BETWEEN TWO SOUNDS USING CLOCK()
-#include <time.h>
+
+/* Now that more research on C++ has been done, the changes made to this test are done in the hopes that it
+   will actually run this time.
+   Source of information: https://www.programiz.com/cpp-programming/library-function/ctime/clock
+
+   
+   CHANGES MADE:
+   
+   1) Removed the MIC sensor as the test only requires the LED (testing the clock() and associated functions
+      to see whether it is better / easier to use than the millis())
+      
+   2) Moved the timing section to a new function: GetDelay()*/
+
+
+
+   
+#include <time.h>  // need to import library for the clock() and associated functions to work
+
+
 
 // declare constants for the pin locations
 const int LED = 7; // digital output pin 7
-const int MIC = A0; // analogue input pin A0
-
 
 // declaring variables
-int beatCount = 0;
- clock_t t;
+ clock_t t1;
+ clock_t t2;
+ unsigned long timing;
+
+
 
 void setup() {
-  Serial.begin(9600); // sets the pin mode for the analog MIC 
-  pinMode(LED, OUTPUT); // this is making the LED an output devide in the program
+  pinMode(LED, OUTPUT);
+  GetDelay();  // calling the function here as it only needs to run once
 }
 
-void loop() {
 
-  // finding the time interval between two beats
-//---------------------------------------------------------------------
-  while(beatCount != 2)
-  {
-    if(analogRead(MIC) > 500) // the 500 may have to be raised or lowered depending on how noisy the room is
-    {
-      t = clock(); // records the time-stamp the first sound is made
-      beatCount++; // increases the beatCount if a successful sound is recorded
-    }
-  }
-  t = clock() - t; // takes the previous time-stamp away from the current time-stamp
- //---------------------------------------------------------------------
-  
+
+void loop() {
   digitalWrite(LED, HIGH);
-  delay(250);
+  delay(100);
   digitalWrite(LED, LOW);
-  delay(t - 250);
+  delay(timing);
+}
+
+unsigned long GetDelay();
+{
+  t1 = clock();
+  delay(350);
+  t2 = clock() - t1;
+  
+  timing = t2 / CLOCKS_PER_SEC;
+  return timing;  
 }
