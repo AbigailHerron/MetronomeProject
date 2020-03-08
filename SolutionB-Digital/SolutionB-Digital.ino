@@ -6,7 +6,7 @@
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7; // Place LED in pin 7 please
-const int MIC = 9; // Place MIC sensor in pin 9 please
+const int BUTTON = 9; // Place MIC sensor in pin 9 please
 
   // Declaring sound threshold here
 const int THRESHOLD = 200;
@@ -25,7 +25,7 @@ int val = 0;
 
 // Setting up Pins
 void setup() {
-  pinMode(MIC, INPUT);
+  pinMode(BUTTON, INPUT);
   pinMode(LED, OUTPUT);
 }// end setup()
 
@@ -88,12 +88,12 @@ void GetBeats(int sound)
       beat++; // increments the number of beats
     }// end if
 
-    sound = digitalRead(MIC);
+    sound = digitalRead(BUTTON);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
   // updating beats to match a minutes worth
-  beat = beat * 10;
+ beat = beat * 10;
 
   // avoiding 'division by 0' error 
   if(beat == 0)
