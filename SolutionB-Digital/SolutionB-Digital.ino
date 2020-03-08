@@ -94,6 +94,12 @@ unsigned long GetBeats(unsigned long sound)
   // updating beats to match a minutes worth
   beat = beat * 10;
 
+  // avoiding 'division by 0' error
+  if(beat == 0)
+  {
+    beat++;
+  }
+
   c = minute / beat;
 
   return c;
