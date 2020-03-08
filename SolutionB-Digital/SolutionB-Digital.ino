@@ -68,7 +68,7 @@ void loop() {
 
   // LED begins blinking to tempo
   digitalWrite(LED, HIGH);
-  delay(100);
+  delay(200);
   digitalWrite(LED, LOW);
   delay(c);
 }// end loop()
@@ -95,7 +95,7 @@ void GetBeats(int sound)
   // updating beats to match a minutes worth
   beat = beat * 10;
 
-  // avoiding 'division by 0' error
+  // avoiding 'division by 0' error 
   if(beat == 0)
   {
     beat++;
