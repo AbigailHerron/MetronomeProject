@@ -34,13 +34,16 @@ void setup() {
   pinMode(LED, OUTPUT);
   
   // only want to run this while no beats have been recorded
-  if(beat == 0)
+  while(val <= 0)
   {
-    val = digitalRead(MIC);
-    GetBeats(val);
- 
-    delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
-  } // end of if() - end of recording beats
+    if(beat <= 0)
+    {
+      val = digitalRead(MIC);
+      GetBeats(val);
+   
+      delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
+    } // end of if() - end of recording beats
+  }
 }// end setup()
 
 
@@ -72,7 +75,7 @@ void GetBeats(int sound)
 
   
   a = millis(); // Getting initial time here so it doesn't update within the loop
-  
+  beat++; // avoiding a 'division by 0' error incase no beats are recorded
   while(b < 6000) // Until 6 seconds have passed
   {
     if(sound > THRESHOLD)
