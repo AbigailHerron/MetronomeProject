@@ -19,7 +19,7 @@ const int LED = 7; // Place LED in pin 7 please
 const int MIC = 9; // Place MIC sensor in pin 9 please
 
   // Declaring sound threshold here
-const int THRESHOLD = 500;
+const int THRESHOLD = 200;
 
 
   // Declaring millisecond variables
