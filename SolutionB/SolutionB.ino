@@ -8,10 +8,15 @@
    
    This should give the user a better idea of what's going on, and if the program is running.*/
 
+// THIS IS A POSSIBLE SOLUTION TO METRONOME PROBLEM - THIS SHOULD RUN
+/*NOTES:
+ * The only difference between Solution B and Solution B - Digital is that the MIC pin has been changed from
+   Analoge to Digital*/
+
 // Declaring Variables and Constants
   // Declaring pins
-const int LED = 7;
-const int MIC = A0;
+const int LED = 7; // Place LED in pin 7 please
+const int MIC = 9; // Place MIC sensor in pin 9 please
 
   // Declaring sound threshold here
 const int THRESHOLD = 0;
@@ -25,14 +30,13 @@ unsigned long minute = 60000; // there are 60 thousand milliseconds in a minute
 
   // Declaring beat counter
 int beat = 0;
+int val = 0;
 
 
 // Setting up Pins
 void setup() {
   pinMode(MIC, INPUT);
   pinMode(LED, OUTPUT);
-  Serial.begin(9600);
-
 }// end setup()
 
 
@@ -56,8 +60,8 @@ void loop() {
 
     
     // declaring val and beatDelay variables (local to loop only)
-    unsigned long val = analogRead(MIC);
-    unsigned long beatDelay = GetBeats(val);
+    val = analogRead(MIC);
+    GetBeats(val);
 
 
     // Two LED blips after recording
@@ -76,14 +80,14 @@ void loop() {
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
   digitalWrite(LED, LOW);
-  delay(beatDelay - 250);
+  delay(c);
 }// end loop()
 
 
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(unsigned long sound)
+void GetBeats(int sound)
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
@@ -101,8 +105,12 @@ unsigned long GetBeats(unsigned long sound)
   // updating beats to match a minutes worth
   beat = beat * 10;
 
-  c = minute / beat;
+  // avoiding 'division by 0' error
+  if(beat == 0)
+  {
+    beat++;
+  }
 
-  return c;
+  c = minute / beat;
   
 }// end GetBeats()
