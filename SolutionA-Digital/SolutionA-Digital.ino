@@ -6,7 +6,7 @@
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7;  // Place LED in pin 7 please
-const int MIC = A0; // Place MIC in pin A0 please
+const int BUTTON = 9; // Place MIC in pin A0 please
 
   // Declaring sound threshold here
 const int THRESHOLD = 0; // feel free to raise this value if MIC is picking up background noise
@@ -24,7 +24,7 @@ int val = 0;
 
 // Setting up Pins
 void setup() {
-  pinMode(MIC, INPUT);
+  pinMode(BUTTON, INPUT);
   pinMode(LED, OUTPUT);
   Serial.begin(9600);  // Unsure whether this is necessary or not...
 }
@@ -39,7 +39,7 @@ void loop() {
   if(beat == 0)
   {
     // declaring val variable (local to loop only)
-    val = digitalRead(MIC);
+    val = digitalRead(BUTTON);
     GetBeats(val);
   }
 
@@ -64,7 +64,7 @@ void GetBeats(int sound)
       beat++; // increments the number of beats
     }// end if
 
-    sound = digitalRead(MIC);
+    sound = digitalRead(BUTTON);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
