@@ -55,7 +55,7 @@ void loop() {
 
  
   // will only start recording the beats if the MIC picks up at least 1 sound 
-  while(val <= 0)
+  while(val <= THRESHOLD)
   {
     val = analogRead(MIC);
   }
