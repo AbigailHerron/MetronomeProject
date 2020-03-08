@@ -20,13 +20,13 @@
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7;  // Place LED in pin 7 please
-const int MIC = A0; // Place MIC sensor in pin A0 please
+const int BUTTON = A0; // Place MIC sensor in pin A0 please
 
   // Declaring sound threshold here
 const int THRESHOLD = 0;
 
 
-const unsigned long LED_BLINK = 250;  // Declaring LED ON length here
+const unsigned long LED_BLINK = 100;  // Declaring LED ON length here
 const unsigned long MINUTE = 60000;  // there are 60 thousand milliseconds in a minute
 
 
@@ -43,7 +43,7 @@ int val = 0;
 void setup() {
 
   // Setting up Pins
-  pinMode(MIC, INPUT); 
+  pinMode(BUTTON, INPUT); 
   pinMode(LED, OUTPUT);
 }// end setup()
 
@@ -100,7 +100,7 @@ void GetBeats(int sound)
       beat++; // increments the number of beats
     }// end if
 
-    sound = analogRead(MIC);
+    sound = analogRead(BUTTON);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
@@ -112,9 +112,6 @@ void GetBeats(int sound)
     digitalWrite(LED, HIGH);
     delay(200);
     digitalWrite(LED, LOW);  
-
-  // updating beats to match a minutes worth
-  beat = beat * 10;
 
   c = (MINUTE / beat) - LED_BLINK;
 }// end GetBeats()
