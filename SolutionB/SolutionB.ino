@@ -78,7 +78,7 @@ void loop() {
 
   // LED begins blinking to tempo
   digitalWrite(LED, HIGH);
-  delay(250); // LED shoudl be on for a quater of a second
+  delay(100);
   digitalWrite(LED, LOW);
   delay(c);
 }// end loop()
