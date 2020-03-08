@@ -36,14 +36,15 @@ void setup() {
   // only want to run this while no beats have been recorded
   while(val <= 0)
   {
-    if(beat <= 0)
-    {
-      val = digitalRead(MIC);
-      GetBeats(val);
-   
-      delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
-    } // end of if() - end of recording beats
+    val = digitalRead(MIC);
   }
+  
+  if(beat <= 0)
+  {
+    GetBeats(val);
+    delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
+  } // end of if() - end of recording beats
+
 }// end setup()
 
 
