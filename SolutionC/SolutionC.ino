@@ -2,20 +2,18 @@
 /*NOTES:
  * This is almost identical to Solution B: CHANGES BELOW
  * 
- * 1) Moved the initial setup of beatDelay to the setup() as it only runs once.
+ * 1) Put the initial blinking LED to indicate Start and Stop recording into the GetBeat() function.
  * 
- * 2) Put the initial blinking LED to indicate Start and Stop recording into the GetBeat() function.
+ * 2) Declared int val before either setup() or loop() functions
  * 
- * 3) Declared int val before either setup() or loop() functions
+ * 3) Deleted beatDelay - changed GetBeat() to type VOID and had it update variable c instead
  * 
- * 4) Deleted beatDelay - changed GetBeat() to type VOID and had it update variable c instead
+ * 4) Returned MINUTE to a constant, included the time we want the LED to stay on as the constant LED_BLINK
  * 
- * 5) Returned MINUTE to a constant, included the time we want the LED to stay on as the constant LED_BLINK
- * 
- * 6) Passed variable c to delay instead of beatDelay, updated the time of variable c to include the loss of LED_BLINK length
+ * 5) Passed variable c to delay instead of beatDelay, updated the time of variable c to include the loss of LED_BLINK length
  *    so that the tempo delay() wouldn't have to perform a calculation inside it
  *    
- * 7) Removed Serial.begin(9600)*/
+ * 6) Removed Serial.begin(9600)*/
 
  
 
@@ -47,8 +45,16 @@ void setup() {
   // Setting up Pins
   pinMode(MIC, INPUT); 
   pinMode(LED, OUTPUT);
-  // only want to run this while no beats have been recorded
-  
+}// end setup()
+
+
+
+
+// Running the Program
+void loop() {
+
+ 
+  // will only start recording the beats if the MIC picks up at least 1 sound 
   while(val <= 0)
   {
     val = analogRead(MIC);
@@ -60,13 +66,7 @@ void setup() {
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
   } // end of if() - end of recording beats
 
-}// end setup()
-
-
-
-
-// Running the Program
-void loop() {
+  
   // LED begins blinking to tempo
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
