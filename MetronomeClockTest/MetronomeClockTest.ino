@@ -13,10 +13,8 @@
    2) Moved the timing section to a new function: GetDelay()*/
 
 
-
-   
-#include <time.h>  // need to import library for the clock() and associated functions to work
-
+// need to import Ctime header file in order for clock() to work
+#include <ctime>
 
 
 // declare constants for the pin locations
