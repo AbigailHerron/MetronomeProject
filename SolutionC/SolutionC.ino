@@ -15,17 +15,17 @@
  * 6) Passed variable c to delay instead of beatDelay, updated the time of variable c to include the loss of LED_BLINK length
  *    so that the tempo delay() wouldn't have to perform a calculation inside it
  *    
- * 7) Removed Serial.begin(9600) and replaced it with pinMode(MIC, INPUT)*/
+ * 7) Removed Serial.begin(9600)*/
 
  
 
 // Declaring Variables and Constants
   // Declaring pins
-const int LED = 7;
-const int MIC = A0; // 1) NOTE: if MIC is a digital input, replace line with: const int MIC = 9
+const int LED = 7;  // Place LED in pin 7 please
+const int MIC = A0; // Place MIC sensor in pin A0 please
 
   // Declaring sound threshold here
-const int THRESHOLD = 0;  // 2) NOTE: if MIC is digital, replace line with: const string THRESHOLD = "HIGH";
+const int THRESHOLD = 0;
 
 
 const unsigned long LED_BLINK = 250;  // Declaring LED ON length here
@@ -47,11 +47,10 @@ void setup() {
   // Setting up Pins
   pinMode(MIC, INPUT); 
   pinMode(LED, OUTPUT);
-  
   // only want to run this while no beats have been recorded
   if(beat == 0)
   {
-    val = analogRead(MIC); // 3) NOTE: if MIC is digital, replace line with: val = digitalRead(MIC);
+    val = analogRead(MIC);
     GetBeats(val);
  
     delay(3000);     // 3 second delay before the LED starts repeating the recorded interval in loop()
@@ -74,7 +73,7 @@ void loop() {
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-void GetBeats(int sound) // 4) NOTE: if MIC is digital, replace line with: int GetBeats(string sound);
+void GetBeats(int sound)
 {
   // Two LED blips before recording
     digitalWrite(LED, HIGH);
@@ -96,7 +95,7 @@ void GetBeats(int sound) // 4) NOTE: if MIC is digital, replace line with: int G
       beat++; // increments the number of beats
     }// end if
 
-    sound = analogRead(MIC); // 5) NOTE: if MIC is digital, replace line with: sound = digitalRead(MIC);
+    sound = analogRead(MIC);
     b = millis() - a; // this will update the length of time stored in b
   }// end while
 
