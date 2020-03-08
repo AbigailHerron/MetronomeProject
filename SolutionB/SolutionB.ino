@@ -19,7 +19,7 @@ const int LED = 7; // Place LED in pin 7 please
 const int MIC = 9; // Place MIC sensor in pin 9 please
 
   // Declaring sound threshold here
-const int THRESHOLD = 200;
+const int THRESHOLD = 500;
 
 
   // Declaring millisecond variables
@@ -103,7 +103,7 @@ void GetBeats(int sound)
   }// end while
 
   // updating beats to match a minutes worth
-  beat = beat * 10;
+  //beat = beat * 10;
 
   // avoiding 'division by 0' error
   if(beat == 0)
