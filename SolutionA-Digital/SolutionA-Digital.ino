@@ -6,7 +6,7 @@
 // Declaring Variables and Constants
   // Declaring pins
 const int LED = 7;  // Place LED in pin 7 please
-const int MIC = 9; // Place MIC in pin 9 please
+const int MIC = A0; // Place MIC in pin A0 please
 
   // Declaring sound threshold here
 const int THRESHOLD = 0; // feel free to raise this value if MIC is picking up background noise
@@ -19,12 +19,14 @@ unsigned long c; // is the returned length between each beat in a minute
 
   // Declaring beat counter
 int beat = 0;
+int val = 0;
 
 
 // Setting up Pins
 void setup() {
   pinMode(MIC, INPUT);
   pinMode(LED, OUTPUT);
+  Serial.begin(9600);  // Unsure whether this is necessary or not...
 }
 
 
@@ -37,21 +39,21 @@ void loop() {
   if(beat == 0)
   {
     // declaring val variable (local to loop only)
-    unsigned long val = digitalRead(MIC);
-    unsigned long beatDelay = GetBeats(val);
+    val = digitalRead(MIC);
+    GetBeats(val);
   }
 
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
   digitalWrite(LED, LOW);
-  delay(beatDelay - 250);
+  delay(c);
 }
 
 
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(unsigned long sound)
+void GetBeats(int sound)
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
@@ -69,8 +71,14 @@ unsigned long GetBeats(unsigned long sound)
   // updating beats to match a minutes worth
   beat = beat * 10;
 
+  // avoiding 'division by 0' errors
+  if(beat == 0)
+  {
+    beat++;
+  }
+
+
   c = MINUTE / beat;
 
-  return c;
   
 }// end GetBeats()
