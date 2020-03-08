@@ -30,6 +30,7 @@ unsigned long c; // is the returned length between each beat in a minute
 
   // Declaring beat counter
 int beat = 0;
+int val = 0;
 
 
 // Setting up Pins
@@ -49,21 +50,21 @@ void loop() {
   if(beat == 0)
   {
     // declaring val variable (local to loop only)
-    unsigned long val = analogRead(MIC);
-    unsigned long beatDelay = GetBeats(val);
+    val = analogRead(MIC);
+    GetBeats(val);
   }
 
   digitalWrite(LED, HIGH);
   delay(250); // LED shoudl be on for a quater of a second
   digitalWrite(LED, LOW);
-  delay(beatDelay - 250);
+  delay(c);
 }
 
 
 
 
 // CALCULATES HOW MANY BEATS THERE ARE IN A MINUTE BASED ON THE INPUT OF THE MIC
-unsigned long GetBeats(unsigned long sound)
+void GetBeats(int sound)
 {
   a = millis(); // Getting initial time here so it doesn't update within the loop
   
@@ -81,8 +82,14 @@ unsigned long GetBeats(unsigned long sound)
   // updating beats to match a minutes worth
   beat = beat * 10;
 
+  // avoiding 'division by 0' errors
+  if(beat == 0)
+  {
+    beat++;
+  }
+
+
   c = MINUTE / beat;
 
-  return c;
   
 }// end GetBeats()
