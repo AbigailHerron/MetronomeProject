@@ -152,5 +152,5 @@ unsigned long GetLastBeat()
     HttpClient client;
   
   String intervalRequest = "https://sheets.googleapis.com/v4/spreadsheets/858919912724-gcmeice7emiijf9ubpj6fktdcfpk7vvm.apps.googleusercontent.com/values/C2:C2";
-  interval = client.get(intervalRequest);
+  return client.get(intervalRequest);
 }// end GetLastBeat
